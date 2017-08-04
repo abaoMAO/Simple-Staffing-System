@@ -1,0 +1,67 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <script type="text/javascript" src="{% static 'mainSystem/js/jquery.min.js' %}"></script>
+    <link rel="icon" href="http://v3.bootcss.com/favicon.ico">
+
+    <title>Signin Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'mainSystem/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="{% static 'mainSystem/css/ie10-viewport-bug-workaround.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'mainSystem/css/signin.css' %}" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <form class="form-signin" method="post">
+        <h2 class="form-signin-heading">注册</h2>
+        <label for="inputEmail" class="sr-only">Email address</label>
+          <!--姓名检测 id指定为inputName-->
+        <input type="text" name="username" id="inputName" class="form-control" placeholder="用户名" required="" autofocus="">
+          <span class="namecheck"></span>   <!--姓名检测-->
+          <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name="password1" id="inputPassword" class="form-control" placeholder="密码" required=""><label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name="password2" id="inputPassword" class="form-control" placeholder="确认密码" required=""><label for="inputPassword" class="sr-only">Password</label>
+        <input type="text" name="nick" id="" class="form-control" placeholder="昵称" required="">
+        <input type="text" name="telphone" id="" class="form-control" placeholder="电话" required="">
+        <div>
+            <span style="color: red">{{ error }}</span>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">提交</button>
+      </form>
+
+    </div> <!-- /container -->
+
+    <script src="{% static 'mainSystem/js/ie10-viewport-bug-workaround.js' %}"></script>
+    <script type="text/javascript">
+        //dom加载完毕则执行回调函数
+        //dom加载完毕则执行回掉函数
+        $(document).ready(function(){
+            $('#inputName').blur(function(){ //失去焦点事件
+                var name = $(this).val() //获取文本框中的内容中
+                $.get('{% url 'mainSystem:checkname' %}',{name:name},function(callback){ //用ajax 发起get请求
+                    if (callback == 'ok'){  //用户名ok 可以注册
+                        $('.namecheck').text('用户名可以注册').css('color','green')
+                    }
+                    else{
+                        $('.namecheck').text(callback).css('color','red')
+                    }
+                }); // get 的 p1 : http请求地址  p2 get请求的查询参数是什么   p3 : 回调函数
+            })
+        })
+    </script>
+
+</body></html>

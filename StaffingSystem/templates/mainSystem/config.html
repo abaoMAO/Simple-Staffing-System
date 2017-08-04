@@ -1,0 +1,14 @@
+{% extends 'mainSystem/base.html' %}
+
+{% block main %}
+    <form class="form-horizontal" action="" method="get">
+        <div class="form-group">
+            <label class="control-label col-sm-2">每页显示条数</label>
+            <div class=" col-sm-6">
+                <input class="form-control" type="text" name="per_page" value="{{ request.COOKIES.per_page }}">
+            </div>
+            <input type="submit" value="保存">
+
+        </div>
+    </form>
+{% endblock %}

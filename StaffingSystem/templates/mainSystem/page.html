@@ -1,0 +1,43 @@
+
+<nav aria-label="Page navigation" class="text-center">
+    <ul class="pagination">
+        <!--上一页-->
+        {% if empls.has_previous %} <!--内联没有提示，这里是内置函数,前面还有页码-->
+        <li>
+            <a href="?pn={{ empls.previous_page_number }}" aria-label="Previous"> <!--内联没有提示，这里是内置函数,pn=前一页页码-->
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        {% else %}
+        <li class="disabled">
+            <a href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        {% endif %}
+        <!--end-->
+
+        <!--分页数字-->
+        {% for num in page_nums %}
+            {% if num == empls.number %} <!--当前页-->
+                <li class="active"><a href="?pn={{ num }}">{{ num }}</a></li>
+            {% else %} <!--非当前页-->
+                <li><a href="?pn={{ num }}">{{ num }}</a></li>
+            {% endif %}
+        {% endfor %}
+
+        {% if empls.has_next %}
+        <li>
+            <a href="?pn={{ empls.next_page_number }}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+        {% else %}
+        <li class="disabled">
+            <a href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>

@@ -1,0 +1,99 @@
+{% extends 'mainSystem/base.html' %}
+{% load static %}
+{% block css  %}
+    <link rel="stylesheet" href="">
+{% endblock %}
+{% block main %}
+    <table class="table table-bordered table-hover">
+        <tr id="myheadtr">
+            <th>头像</th>
+            <th>姓名
+                <a href="?order=name&rule=u&wd={{ request.GET.wd }}"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></a>
+                <a href="?order=name&rule=d&wd={{ request.GET.wd }}"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span></a>
+            </th>
+            <th>年龄
+                <a href="?order=age&rule=u&wd={{ request.GET.wd }}"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></a>
+                <a href="?order=age&rule=d&wd={{ request.GET.wd }}"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span></a>
+            </th>
+            <th>电话
+                <a href="?order=telphone&rule=u&wd={{ request.GET.wd }}"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></a>
+                <a href="?order=telphone&rule=d&wd={{ request.GET.wd }}"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span></a>
+            </th>
+            <th>邮箱
+                <a href="?order=email&rule=u&wd={{ request.GET.wd }}"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></a>
+                <a href="?order=email&rule=d&wd={{ request.GET.wd }}"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span></a>
+            </th>
+            <th>部门</th>
+            <th>职位</th>
+            <th>职级</th>
+            <th>社团</th>
+            <th>管理</th>
+        </tr>
+         {% for empl in empls %}
+        <tr>
+            <td><img src="{{ empl.avatar.url }}" width="50" height="50"></td>
+            <td>{{ empl.name }}</td>
+            <td>{{ empl.age }}</td>
+            <td>{{ empl.telphone }}</td>
+            <td>{{ empl.email }}</td>
+            <td>{{ empl.dpt.name }}</td>
+            <td>{{ empl.ptn.name }}</td>
+            <td>
+                {% if empl.ptn.id <= 4 %}
+                    核心人员
+                {% else %}
+                    一般职员
+                {% endif %}
+            </td>
+            <td>{{ empl.group.name }}</td>
+            <td>
+                <a href="{% url 'mainSystem:empl_del' %}?eid={{ empl.id }}" onclick="return confirm('真的要删除吗？')">删除</a>
+                <a href="{% url 'mainSystem:empl_edit' %}?eid={{ empl.id }}">修改</a>
+            </td>
+        </tr>
+         {% endfor %}
+    </table>
+{#    {% include 'mainSystem/page.html' %} <!--从外部引入分页功能，里面有函数没有提示-->#}
+    <nav aria-label="Page navigation" class="text-center">
+    <ul class="pagination">
+        <!--上一页-->
+        {% if empls.has_previous %} <!--内联没有提示，这里是内置函数,前面还有页码-->
+        <li>
+            <a href="?pn={{ empls.previous_page_number }}&wd={{ request.GET.wd }}" aria-label="Previous"> <!--内联没有提示，这里是内置函数,pn=前一页页码-->
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        {% else %}
+        <li class="disabled">
+            <a href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        {% endif %}
+        <!--end-->
+
+        <!--分页数字-->
+        {% for num in page_nums %}
+            {% if num == empls.number %} <!--当前页-->
+                <li class="active"><a href="?pn={{ num }}&wd={{ request.GET.wd }}">{{ num }}</a></li>
+            {% else %} <!--非当前页-->
+                <li><a href="?pn={{ num }}&wd={{ request.GET.wd }}">{{ num }}</a></li>
+            {% endif %}
+        {% endfor %}
+
+        {% if empls.has_next %}
+        <li>
+            <a href="?pn={{ empls.next_page_number }}&wd={{ request.GET.wd }}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+        {% else %}
+        <li class="disabled">
+            <a href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+{% endblock %}

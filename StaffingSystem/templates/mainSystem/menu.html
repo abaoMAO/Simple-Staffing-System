@@ -1,0 +1,9 @@
+ <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="{{ index }}"><a href="{% url 'mainSystem:index' %}">员工管理 <span class="sr-only">(current)</span></a></li>
+            <li class="{{ manage }}"><a href="{% url 'mainSystem:empl_add' %}">增加员工</a></li>
+            <li class="{{ advancedSearch }}"><a href="{% url 'mainSystem:advancedSearch' %}">高级查询</a></li>
+            <li class="{{ config }}"><a href="{% url 'mainSystem:config' %}">系统配置</a></li>
+            <li><a href="#">退出系统</a></li>
+          </ul>
+ </div>

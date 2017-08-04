@@ -1,0 +1,46 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="http://v3.bootcss.com/favicon.ico">
+
+    <title>Signin Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'mainSystem/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="{% static 'mainSystem/css/ie10-viewport-bug-workaround.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'mainSystem/css/signin.css' %}" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <form class="form-signin" method="post">  <!--post传值-->
+        <h2 class="form-signin-heading">请登录</h2>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="text" name="username" id="inputEmail" class="form-control" placeholder="用户名" required="" autofocus="">
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="密码" required="">
+        <div>
+            <span style="color: red">{{ error }}</span> <!--显示错误信息-->
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">登陆</button>
+        <a href="{% url 'reg' %}" class="btn btn-lg btn-info btn-block">注册</a>  <!--跳转注册页面-->
+      </form>
+
+    </div> <!-- /container -->
+
+    <script src="{% static 'mainSystem/js/ie10-viewport-bug-workaround.js' %}"></script>
+
+
+</body></html>

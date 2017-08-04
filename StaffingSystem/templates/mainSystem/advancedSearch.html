@@ -1,0 +1,62 @@
+{% extends 'mainSystem/base.html' %}
+
+{% block main %}
+    <form class="form-horizontal" action="" method="post">
+        <div class="form-group">
+            <label class="control-label col-sm-2">姓名</label>
+            <div class=" col-sm-6">
+                <input class="form-control" type="text" name="name" value="{{ empl.name }}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2">年龄</label>
+            <div class=" col-sm-6">
+                <input class="form-control" type="text" name="age" value="{{ empl.age }}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2">电话</label>
+            <div class=" col-sm-6">
+                <input class="form-control" type="text" name="telphone" value="{{ empl.telphone }}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2">邮箱</label>
+            <div class=" col-sm-6">
+                <input class="form-control" type="text" name="email" value="{{ empl.email }}">
+            </div>
+        </div>
+        <!--下拉框选项-->
+        <div class="form-group">
+            <label class="control-label col-sm-2">部门</label>
+            <div class="col-lg-6">
+                <select class="form-control" name="dpt_id" id="">
+                    {% for dpt in departments %}
+                        {% if dpt.id == empl.dpt_id %}
+                            <option value="{{ dpt.id }}" selected="selected"> {{ dpt.name }} </option>
+                        {% else %}
+                            <option value="{{ dpt.id }}"> {{ dpt.name }} </option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2">职位</label>
+            <div class="col-lg-6">
+                <select class="form-control" name="ptn_id" id="">
+                    {% for ptn in positions %}
+                        {% if ptn.id == empl.ptn_id %}
+                            <option value="{{ ptn.id }}" selected="selected"> {{ ptn.name }} </option>
+                        {% else %}
+                            <option value="{{ ptn.id }}"> {{ ptn.name }} </option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            <input class="btn btn-primary" type="submit">
+        </div>
+
+
+    </form>
+{% endblock %}
