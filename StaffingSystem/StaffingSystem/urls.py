@@ -25,7 +25,7 @@ urlpatterns = [
     url(r'^$',mainSystme_views.index,name='index'), #系统首页和主项目的首页设置成一样的
     # StaffingSystem和mainSystem都配置了login，
     # 这样127.0.0.1:8003/login和127.0.0.1:8003/mainSystem/login都能调取views的login函数了
-    url(r'^login/$',mainSystme_views.login,name='login1'),
+    url(r'^login/$',mainSystme_views.login,name='login'),
     url(r'^logout/$',mainSystme_views.logout,name='logout'),
     url(r'^reg/$',mainSystme_views.reg,name='reg'),
     url(r'^mainSystem/',include(mainSystem_urls,namespace='mainSystem')),
